@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ArrowUpRight, Film, FolderOpen, MessageCircle, X } from 'lucide-react';
 import type { GalleryCategory, GalleryItem, Language } from '../types';
-import { CLIENTS, GALLERY_ITEMS, UI_COPY, t } from '../data/content';
+import { GALLERY_ITEMS, UI_COPY, t } from '../data/content';
 import {
   PORTFOLIO_DRIVE_URL,
   buildShowcaseInquiryMessage,
@@ -24,69 +24,64 @@ export function GalleryAndClientsSection({ lang }: GalleryAndClientsSectionProps
     setFailedImages((prev) => ({ ...prev, [id]: true }));
   };
 
+  const isCompactFilteredGrid = visibleItems.length > 0 && visibleItems.length <= 2;
+
   return (
     <section
       id="work"
-      className="scroll-mt-16 border-b border-black/8 dark:border-white/8 py-18 sm:py-24"
+      className="scroll-mt-16 border-b border-black/8 dark:border-white/8 bg-[#F3F1EB]/60 dark:bg-[#0D111A] py-20 sm:py-28"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Work Gallery Header + Drive Link */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <div className="max-w-2xl">
-            <p className="text-xs sm:text-sm font-semibold text-[#8C6D11] dark:text-[#D4AF37]">
-              {t(UI_COPY.gallery.eyebrow, lang)}
-            </p>
-            <h2 className="mt-2.5 text-2xl sm:text-4xl font-bold tracking-tight text-[#111827] dark:text-[#F9FAFB]">
-              {t(UI_COPY.gallery.heading, lang)}
-            </h2>
-            <p className="mt-3.5 text-base leading-relaxed text-[#4B5563] dark:text-[#9CA3AF]">
-              {t(UI_COPY.gallery.subtitle, lang)}
-            </p>
-          </div>
+        {/* Centered Editorial Header */}
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs sm:text-sm font-semibold text-[#8C6D11] dark:text-[#D4AF37]">
+            {t(UI_COPY.gallery.eyebrow, lang)}
+          </p>
+          <h2 className="mt-3 text-2xl sm:text-4xl font-bold tracking-tight text-balance text-[#111827] dark:text-[#F9FAFB]">
+            {t(UI_COPY.gallery.heading, lang)}
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#4B5563] dark:text-[#9CA3AF]">
+            {t(UI_COPY.gallery.subtitle, lang)}
+          </p>
+        </div>
 
-          <a
-            href={PORTFOLIO_DRIVE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#D4AF37]/60 bg-white dark:bg-[#131822] hover:bg-[#D4AF37] hover:text-[#0B0E14] dark:hover:bg-[#D4AF37] dark:hover:text-[#0B0E14] px-5 py-3 text-sm font-semibold text-[#111827] dark:text-[#F3F4F6] transition-colors duration-150 whitespace-nowrap shrink-0 self-start lg:self-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4AF37]"
+        {/* Centered Category Filter Tabs */}
+        <div className="mt-10 flex justify-center">
+          <div
+            role="tablist"
+            aria-label="Work Gallery Categories"
+            className="inline-flex flex-wrap justify-center gap-1.5 rounded-lg border border-black/10 dark:border-white/10 bg-white/80 dark:bg-[#131822] p-1"
           >
-            <FolderOpen className="h-4 w-4 shrink-0" aria-hidden="true" />
-            <span>{t(UI_COPY.gallery.driveCta, lang)}</span>
-            <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-          </a>
+            {UI_COPY.gallery.filters.map((filter) => {
+              const isSelected = activeCategory === filter.id;
+              return (
+                <button
+                  key={filter.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isSelected}
+                  onClick={() => setActiveCategory(filter.id)}
+                  className={`rounded-md px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-semibold transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-[#D4AF37] ${
+                    isSelected
+                      ? 'bg-[#111827] text-white dark:bg-[#D4AF37] dark:text-[#0B0E14]'
+                      : 'text-[#4B5563] hover:text-[#111827] dark:text-[#9CA3AF] dark:hover:text-white'
+                  }`}
+                >
+                  {t(filter, lang)}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Category Filter Tabs */}
-        <div
-          role="tablist"
-          aria-label="Work Gallery Categories"
-          className="mt-9 inline-flex flex-wrap gap-1.5 rounded-lg border border-black/10 dark:border-white/10 bg-[#F1EFEA] dark:bg-[#131822] p-1"
-        >
-          {UI_COPY.gallery.filters.map((filter) => {
-            const isSelected = activeCategory === filter.id;
-            return (
-              <button
-                key={filter.id}
-                type="button"
-                role="tab"
-                aria-selected={isSelected}
-                onClick={() => setActiveCategory(filter.id)}
-                className={`rounded-md px-3.5 py-2 text-xs sm:text-sm font-semibold transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-[#D4AF37] ${
-                  isSelected
-                    ? 'bg-[#111827] text-white dark:bg-[#D4AF37] dark:text-[#0B0E14]'
-                    : 'text-[#4B5563] hover:text-[#111827] dark:text-[#9CA3AF] dark:hover:text-white'
-                }`}
-              >
-                {t(filter, lang)}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* 6 Showcase Cards Grid */}
+        {/* Centered Showcase Cards Grid (adapts symmetrically when filtered to 2 items) */}
         <div
           data-testid="gallery-grid"
-          className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className={`mt-10 sm:mt-12 grid grid-cols-1 gap-7 ${
+            isCompactFilteredGrid
+              ? 'mx-auto max-w-4xl md:grid-cols-2'
+              : 'md:grid-cols-2 lg:grid-cols-3'
+          }`}
         >
           {visibleItems.map((item) => (
             <article
@@ -112,7 +107,7 @@ export function GalleryAndClientsSection({ lang }: GalleryAndClientsSectionProps
                 )}
               </div>
 
-              <div className="flex flex-1 flex-col justify-between p-6">
+              <div className="flex flex-1 flex-col justify-between p-6 sm:p-7">
                 <div>
                   {/* Unboxed Metadata with Typographic Separator */}
                   <p className="text-xs font-medium text-[#8C6D11] dark:text-[#D4AF37]">
@@ -123,16 +118,16 @@ export function GalleryAndClientsSection({ lang }: GalleryAndClientsSectionProps
                     </span>
                   </p>
 
-                  <h3 className="mt-2 text-lg font-bold text-[#111827] dark:text-[#F9FAFB]">
+                  <h3 className="mt-2.5 text-lg font-bold tracking-tight text-balance text-[#111827] dark:text-[#F9FAFB]">
                     {t(item.title, lang)}
                   </h3>
 
-                  <p className="mt-2 text-sm leading-relaxed text-[#4B5563] dark:text-[#9CA3AF]">
+                  <p className="mt-2.5 text-sm leading-relaxed text-[#4B5563] dark:text-[#9CA3AF]">
                     {t(item.outcome, lang)}
                   </p>
                 </div>
 
-                <div className="mt-5 border-t border-black/8 dark:border-white/8 pt-4">
+                <div className="mt-6 border-t border-black/8 dark:border-white/8 pt-4">
                   <button
                     type="button"
                     onClick={() => setActiveModalItem(item)}
@@ -147,40 +142,18 @@ export function GalleryAndClientsSection({ lang }: GalleryAndClientsSectionProps
           ))}
         </div>
 
-        {/* Top Clients & Partner Institutions Grid */}
-        <div className="mt-20 border-t border-black/10 dark:border-white/10 pt-16">
-          <div className="max-w-3xl">
-            <p className="text-xs sm:text-sm font-semibold text-[#8C6D11] dark:text-[#D4AF37]">
-              {t(UI_COPY.gallery.clientsEyebrow, lang)}
-            </p>
-            <h3 className="mt-2 text-2xl sm:text-3xl font-bold tracking-tight text-[#111827] dark:text-[#F9FAFB]">
-              {t(UI_COPY.gallery.clientsHeading, lang)}
-            </h3>
-          </div>
-
-          <div
-            data-testid="clients-grid"
-            className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        {/* Centered Full Portfolio Folder Action */}
+        <div className="mt-12 sm:mt-14 flex justify-center">
+          <a
+            href={PORTFOLIO_DRIVE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2.5 rounded-lg border border-[#D4AF37]/65 bg-white dark:bg-[#131822] hover:bg-[#D4AF37] hover:text-[#0B0E14] dark:hover:bg-[#D4AF37] dark:hover:text-[#0B0E14] px-6 py-3.5 text-sm font-semibold text-[#111827] dark:text-[#F3F4F6] transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4AF37]"
           >
-            {CLIENTS.map((client, idx) => (
-              <div
-                key={client.id}
-                className="flex items-start justify-between gap-4 rounded-xl border border-black/10 dark:border-white/10 bg-white dark:bg-[#131822] px-5 py-4"
-              >
-                <div>
-                  <p className="text-base font-bold text-[#111827] dark:text-[#F9FAFB]">
-                    {t(client.name, lang)}
-                  </p>
-                  <p className="mt-1 text-xs font-medium text-[#6B7280] dark:text-[#9CA3AF]">
-                    {t(client.sector, lang)}
-                  </p>
-                </div>
-                <span className="font-en tabular-nums text-xs font-semibold text-[#8C6D11] dark:text-[#D4AF37] shrink-0">
-                  {String(idx + 1).padStart(2, '0')}
-                </span>
-              </div>
-            ))}
-          </div>
+            <FolderOpen className="h-4 w-4 shrink-0" aria-hidden="true" />
+            <span>{t(UI_COPY.gallery.driveCta, lang)}</span>
+            <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+          </a>
         </div>
       </div>
 

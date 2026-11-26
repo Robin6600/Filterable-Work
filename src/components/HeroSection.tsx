@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { ArrowDownRight, Film, MessageCircle } from 'lucide-react';
+import { ArrowDownRight, Calendar, Film, MessageCircle } from 'lucide-react';
 import type { Language } from '../types';
 import { HERO_IMAGE, UI_COPY, t } from '../data/content';
 import { buildWhatsAppUrl } from '../utils/whatsapp';
+import { CONSULTATION_COPY } from '../utils/consultation';
 
 interface HeroSectionProps {
   lang: Language;
+  onRequestConsultation: () => void;
 }
 
-export function HeroSection({ lang }: HeroSectionProps) {
+export function HeroSection({ lang, onRequestConsultation }: HeroSectionProps) {
   const [imgFailed, setImgFailed] = useState(false);
 
   const heroWhatsAppMessage =
@@ -50,13 +52,25 @@ export function HeroSection({ lang }: HeroSectionProps) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2.5 rounded-lg bg-[#10B981] hover:bg-[#059669] px-6 py-3.5 text-sm sm:text-base font-semibold text-white transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#10B981]"
               >
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span>{t(UI_COPY.hero.primaryCta, lang)}</span>
               </a>
 
+              <button
+                type="button"
+                onClick={onRequestConsultation}
+                data-testid="hero-consultation-btn"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#D4AF37]/75 bg-white/90 dark:bg-[#131822] hover:bg-[#D4AF37] hover:text-[#0B0E14] dark:hover:bg-[#D4AF37] dark:hover:text-[#0B0E14] px-5 sm:px-6 py-3.5 text-sm sm:text-base font-semibold text-[#111827] dark:text-[#F3F4F6] transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4AF37]"
+              >
+                <Calendar className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <span>{t(CONSULTATION_COPY.triggerBtn, lang)}</span>
+              </button>
+            </div>
+
+            <div className="mt-4">
               <a
                 href="#packages"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-black/15 dark:border-white/18 bg-white/80 dark:bg-[#131822] hover:border-[#D4AF37] px-6 py-3.5 text-sm sm:text-base font-semibold text-[#111827] dark:text-[#F3F4F6] transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D4AF37]"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#4B5563] dark:text-[#9CA3AF] hover:text-[#8C6D11] dark:hover:text-[#D4AF37] underline-offset-4 hover:underline transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D4AF37]"
               >
                 <span>{t(UI_COPY.hero.secondaryCta, lang)}</span>
                 <ArrowDownRight className="h-4 w-4 text-[#8C6D11] dark:text-[#D4AF37]" aria-hidden="true" />

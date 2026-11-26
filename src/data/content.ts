@@ -1,5 +1,4 @@
 import type {
-  ClientItem,
   GalleryCategory,
   GalleryItem,
   Language,
@@ -581,81 +580,6 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   },
 ];
 
-export const CLIENTS: ClientItem[] = [
-  {
-    id: 'north-point',
-    name: {
-      bn: 'নর্থ পয়েন্ট স্কুল অ্যান্ড কলেজ, পাবনা',
-      en: 'North Point School & College Pabna',
-    },
-    sector: { bn: 'শিক্ষা প্রতিষ্ঠান', en: 'Education' },
-  },
-  {
-    id: 'palash-cadet',
-    name: {
-      bn: 'পলাশ ক্যাডেট, পাবনা',
-      en: 'Palash Cadet Pabna',
-    },
-    sector: { bn: 'ক্যাডেট একাডেমি', en: 'Cadet Academy' },
-  },
-  {
-    id: 'prince-international',
-    name: {
-      bn: 'প্রিন্স ইন্টারন্যাশনাল',
-      en: 'Prince International',
-    },
-    sector: { bn: 'কর্পোরেট ও বাণিজ্য', en: 'Corporate & Trade' },
-  },
-  {
-    id: 'hatil-pabna',
-    name: {
-      bn: 'হাতিল ফার্নিচার, পাবনা',
-      en: 'HATIL Furniture Pabna',
-    },
-    sector: { bn: 'ফার্নিচার শোরুম', en: 'Flagship Showroom' },
-  },
-  {
-    id: 'online-corner',
-    name: {
-      bn: 'অনলাইন কর্নার, পাবনা',
-      en: 'Online Corner Pabna',
-    },
-    sector: { bn: 'রিটেইল ও ই-কমার্স', en: 'Retail & Commerce' },
-  },
-  {
-    id: 'barendra-housing',
-    name: {
-      bn: 'বরেন্দ্র হাউজিং লিমিটেড',
-      en: 'Barendra Housing Limited',
-    },
-    sector: { bn: 'রিয়েল এস্টেট ডেভেলপার', en: 'Real Estate Developer' },
-  },
-  {
-    id: 'latif-real-estate',
-    name: {
-      bn: 'লতিফ রিয়েল স্টেট লিমিটেড',
-      en: 'Latif Real Estate Limited',
-    },
-    sector: { bn: 'রিয়েল এস্টেট ডেভেলপার', en: 'Real Estate Developer' },
-  },
-  {
-    id: 'fair-hospital',
-    name: {
-      bn: 'ফেয়ার হসপিটাল & ডায়াগনস্টিক সেন্টার',
-      en: 'Fair Hospital & Diagnostic Center',
-    },
-    sector: { bn: 'হসপিটাল ও ডায়াগনস্টিক', en: 'Healthcare & Diagnostics' },
-  },
-  {
-    id: 'pabna-riverview',
-    name: {
-      bn: 'পাবনা রিভারভিউ রেস্টুরেন্ট অ্যান্ড রিসোর্ট',
-      en: 'Pabna Riverview Restaurant & Resort',
-    },
-    sector: { bn: 'রেস্টুরেন্ট ও রিসোর্ট', en: 'Hospitality & Resort' },
-  },
-];
-
 export const UI_COPY = {
   nav: {
     process: { bn: 'আস্থা ও প্রক্রিয়া', en: 'Trust & Process' },
@@ -1098,14 +1022,6 @@ export const UI_COPY = {
     modalBookSimilar: {
       bn: 'এমন কাজের জন্য WhatsApp করুন',
       en: 'Inquire Similar Production on WhatsApp',
-    },
-    clientsEyebrow: {
-      bn: 'আমাদের শীর্ষ ক্লায়েন্ট ও পার্টনার প্রতিষ্ঠানসমূহ',
-      en: 'Top Clients & Partner Institutions',
-    },
-    clientsHeading: {
-      bn: 'পাবনা ও অঞ্চলের স্বনামধন্য প্রতিষ্ঠানগুলোর বিশ্বস্ত প্রোডাকশন পার্টনার',
-      en: 'Trusted by Leading Institutions, Developers & Showrooms',
     },
   },
   contact: {

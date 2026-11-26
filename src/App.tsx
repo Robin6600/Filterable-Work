@@ -4,11 +4,15 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { ProcessAndRulesSection } from './components/ProcessAndRulesSection';
 import { PackagesSection } from './components/PackagesSection';
+import { GrowthRoiEstimator } from './components/GrowthRoiEstimator';
 import { SpecialDemandsSection } from './components/SpecialDemandsSection';
 import { GalleryAndClientsSection } from './components/GalleryAndClientsSection';
+import { TestimonialsSection } from './components/TestimonialsSection';
+import { FaqSection } from './components/FaqSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { ConsultationModal } from './components/ConsultationModal';
 
 function getInitialLanguage(): Language {
   try {
@@ -37,6 +41,7 @@ function getInitialTheme(): Theme {
 export default function App() {
   const [lang, setLang] = useState<Language>(getInitialLanguage);
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -79,16 +84,27 @@ export default function App() {
       />
 
       <main>
-        <HeroSection lang={lang} />
+        <HeroSection
+          lang={lang}
+          onRequestConsultation={() => setIsConsultationOpen(true)}
+        />
         <ProcessAndRulesSection lang={lang} />
         <PackagesSection lang={lang} />
+        <GrowthRoiEstimator lang={lang} />
         <SpecialDemandsSection lang={lang} />
         <GalleryAndClientsSection lang={lang} />
+        <TestimonialsSection lang={lang} />
+        <FaqSection lang={lang} />
         <ContactSection lang={lang} />
       </main>
 
       <Footer lang={lang} />
       <FloatingWhatsApp lang={lang} />
+      <ConsultationModal
+        isOpen={isConsultationOpen}
+        lang={lang}
+        onClose={() => setIsConsultationOpen(false)}
+      />
     </div>
   );
 }

@@ -39,6 +39,9 @@ export function Footer({ lang }: FooterProps) {
             <a href="#work" className="hover:text-[#8C6D11] dark:hover:text-[#D4AF37] transition-colors">
               {t(UI_COPY.nav.work, lang)}
             </a>
+            <a href="#faq" className="hover:text-[#8C6D11] dark:hover:text-[#D4AF37] transition-colors">
+              {lang === 'bn' ? 'প্রশ্নোত্তর' : 'FAQ'}
+            </a>
             <a href="#contact" className="hover:text-[#8C6D11] dark:hover:text-[#D4AF37] transition-colors">
               {t(UI_COPY.nav.contact, lang)}
             </a>

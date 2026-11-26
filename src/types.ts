@@ -56,12 +56,6 @@ export interface GalleryItem {
   description: BilingualText;
 }
 
-export interface ClientItem {
-  id: string;
-  name: BilingualText;
-  sector: BilingualText;
-}
-
 export interface ContactFormData {
   businessName: string;
   phone: string;
